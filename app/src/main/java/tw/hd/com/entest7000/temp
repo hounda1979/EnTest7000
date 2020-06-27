@@ -1,0 +1,123 @@
+  protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        logicLayer = new LogicLayer(this);
+        testList = logicLayer.getFiftyString();
+        findview();
+
+
+        EtSQLHelper etSQLHelper = new EtSQLHelper(this);
+        int temp = etSQLHelper.getDBSize();
+        Log.d("wordDB.size() ",temp+"");
+
+
+    }
+    public void okbutton(View view){
+        checkString();
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode ==KeyEvent.KEYCODE_BACK){
+            new AlertDialog.Builder(this).setMessage("要退出程式嗎?")
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            }).show();
+            return true;
+        }else{
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
+    private void checkString() {
+
+        creadTTL();
+        if(testList.size()<0){
+            Toast.makeText(this,"今天復習完成",Toast.LENGTH_LONG);
+            finish();
+        }
+        String input = inputEd.getText().toString();
+        if(testList.get(0).getEnString().equals(input)){
+            testList.remove(0);
+            enNumber.setText(testList.size()+" / 50");
+            String stringStenten = logicLayer.setTestEnsenten(testList.get(0));
+            if(stringStenten.equals("null")){
+                enSenten.setText(testList.get(0).getEnString());
+                cnSenten.setText(testList.get(0).getCnString());
+            }else{
+                enSenten.setText(logicLayer.setTestEnsenten(testList.get(0)));
+                cnSenten.setText(testList.get(0).getCnSentence());
+            }
+
+            inputLayout.setError(null);
+            inputEd.setText(null);
+        }else {
+            inputLayout.setError(testList.get(0).getEnString());
+            tts.speak(testList.get(0).getEnSentence(),TextToSpeech.QUEUE_FLUSH,null,"1");
+
+        }
+    }
+
+    private void findview() {
+        enSenten = findViewById(R.id.enSenten);
+        cnSenten = findViewById(R.id.cnSenten);
+        if(logicLayer.setTestEnsenten(testList.get(0)).equals("null")){
+            enSenten.setText(testList.get(0).getEnString());
+            cnSenten.setText(testList.get(0).getCnString());
+        }else{
+            enSenten.setText(logicLayer.setTestEnsenten(testList.get(0)));
+            cnSenten.setText(testList.get(0).getCnSentence());
+        }
+
+        Button okbutton = findViewById(R.id.ok_button);
+        enNumber = findViewById(R.id.m_enNumber);
+        enNumber.setText("1 / 50");
+        inputLayout = findViewById(R.id.textInputLayout);
+        inputLayout.setErrorEnabled(true);
+        inputEd = findViewById(R.id.inputEdText);
+        inputEd.setImeOptions(EditorInfo.IME_ACTION_SEND);
+        inputEd.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                checkString();
+                return false;
+            }
+        });
+    }
+private void creadTTL(){
+        if(tts == null){
+            tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) {
+                    if(status == TextToSpeech.SUCCESS){
+                        Locale us = Locale.US;
+                        if(tts.isLanguageAvailable(us) == TextToSpeech.LANG_COUNTRY_AVAILABLE){
+                            tts.setLanguage(us);
+                        }
+                    }
+                }
+            });
+        }
+
+}
+
+    @Override
+    protected void onDestroy() {
+        if(tts != null){
+            tts.stop();
+            tts.shutdown();
+        }
+        android.os.Process.killProcess(android.os.Process.myPid());
+        super.onDestroy();
+    }
+}
