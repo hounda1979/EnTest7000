@@ -17,12 +17,23 @@ public class EtSQLHelper extends SQLiteAssetHelper {
     public EtSQLHelper(Context context) {
         super(context, DATABASE_NAME,null, DATABASE_VERSION);
     }
-    public Integer getDBSize(){
+    public Integer getDBSize(int levelNum){
+
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM LV7000",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM LV7000  WHERE level = "+levelNum ,null);
         int returnNum = cursor.getCount();
         cursor.close();
         return returnNum;
+    }
+    public ArrayList<Integer> getDBidfromLevel(int level){
+        ArrayList<Integer> getIdlist = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM LV7000  WHERE level = "+level,null);
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            getIdlist.add(id);
+        }
+        return getIdlist;
     }
     public EnData getStringData(int idNumber){
         SQLiteDatabase db = getReadableDatabase();

@@ -2,6 +2,12 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Item1" />
-    <item android:title="Item2" />
+    <item
+        android:id="@+id/mainpage"
+        android:title="主頁"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/settingpage"
+        android:title="設定"
+        app:showAsAction="never" />
 </menu>
