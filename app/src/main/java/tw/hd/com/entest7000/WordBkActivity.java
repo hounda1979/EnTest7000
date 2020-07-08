@@ -3,6 +3,7 @@ package tw.hd.com.entest7000;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.KeyEvent;
@@ -49,6 +50,10 @@ public class WordBkActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.mainpage:
+                SharedPreferences prf = getSharedPreferences("en7000",MODE_PRIVATE);
+                prf.edit()
+                        .putInt("Type",0)
+                        .commit();
                 intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -84,7 +89,7 @@ public class WordBkActivity extends AppCompatActivity {
         wbkedit.setImeOptions(EditorInfo.IME_ACTION_SEND);
         wbkwordNum.setText("1 / "+ getNumber);
         wbklevel.setText("LV"+getLevel);
-        ImageView wbkimageplay = findViewById(R.id.sbk_image_play);
+        ImageView wbkimageplay = findViewById(R.id.wbk_imageplay);
         wbkimageplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

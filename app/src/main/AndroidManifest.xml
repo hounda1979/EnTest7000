@@ -12,11 +12,17 @@
         <activity
             android:name=".SettingActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SenBkActivity" />
-        <activity android:name=".WordBkActivity" />
-        <activity android:name=".WordActivity" />
-        <activity android:name=".SentencesActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".SenBkActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WordBkActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SentencesActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

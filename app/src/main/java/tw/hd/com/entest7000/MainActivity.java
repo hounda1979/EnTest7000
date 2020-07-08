@@ -52,18 +52,22 @@ public class MainActivity extends AppCompatActivity  {
             case 1:
                 intent = new Intent(this,WordActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case 2:
                 intent = new Intent(this,SentencesActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case 3:
                 intent = new Intent(this,WordBkActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case 4:
                 intent = new Intent(this,SenBkActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
 
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity  {
                 .commit();
         intent = new Intent(this,WordActivity.class);
         startActivity(intent);
+        finish();
 
     }
     public void msentence(View view){
@@ -87,6 +92,7 @@ public class MainActivity extends AppCompatActivity  {
                 .commit();
         intent = new Intent(this,SentencesActivity.class);
         startActivity(intent);
+        finish();
     }
     public void mwordbk(View view){
         type = 3;
@@ -96,6 +102,7 @@ public class MainActivity extends AppCompatActivity  {
                 .commit();
         intent = new Intent(this,WordBkActivity.class);
         startActivity(intent);
+        finish();
 
     }
     public void msentencebk(View view){
@@ -105,6 +112,7 @@ public class MainActivity extends AppCompatActivity  {
                 .commit();
       Intent  intent = new Intent(this,SenBkActivity.class);
         startActivity(intent);
+        finish();
 
     }
 }

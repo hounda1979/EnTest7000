@@ -121,3 +121,21 @@ private void creadTTL(){
         super.onDestroy();
     }
 }
+
+ <activity
+            android:name=".SettingActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SenBkActivity" />
+        <activity android:name=".WordBkActivity" />
+        <activity android:name=".WordActivity" />
+        <activity android:name=".SentencesActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>

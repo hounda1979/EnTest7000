@@ -3,6 +3,7 @@ package tw.hd.com.entest7000;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.Menu;
@@ -54,6 +55,10 @@ public class SenBkActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.mainpage:
+                SharedPreferences prd = getSharedPreferences("en7000",MODE_PRIVATE);
+                prd.edit()
+                        .putInt("Type",0)
+                        .commit();
                 intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 finish();

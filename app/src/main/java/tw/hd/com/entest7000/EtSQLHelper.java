@@ -17,6 +17,7 @@ public class EtSQLHelper extends SQLiteAssetHelper {
     public EtSQLHelper(Context context) {
         super(context, DATABASE_NAME,null, DATABASE_VERSION);
     }
+
     public Integer getDBSize(int levelNum){
 
         SQLiteDatabase db = getReadableDatabase();

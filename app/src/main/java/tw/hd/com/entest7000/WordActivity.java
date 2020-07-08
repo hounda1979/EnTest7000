@@ -68,7 +68,7 @@ public class WordActivity extends AppCompatActivity {
                 break;
             case R.id.settingpage:
                 intent = new Intent(this,SettingActivity.class);
-                startActivity(intent);
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
